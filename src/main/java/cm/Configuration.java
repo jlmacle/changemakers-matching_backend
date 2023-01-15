@@ -36,7 +36,7 @@ public class Configuration {
         // 5433	is used by the instance of PostgreSQL used for testing. 		
         String dbUSERNAME = null ;
         String dbPASSWORD = null ;
-        boolean dockerIsBeingUsed = false;
+        boolean theAppIsRunningInADockerContainer = false;
         String dbJdbcRootFile = "DB_JDBC_ROOT_FILE";
         String postgresDbFile = "POSTGRES_DB_FILE";
         String postgresUserFile = "POSTGRES_USER_FILE";
@@ -53,7 +53,7 @@ public class Configuration {
         
         if (System.getenv(postgresUserFile) != null)
         {
-            dockerIsBeingUsed = true;
+            theAppIsRunningInADockerContainer = true;
             dbUSERNAME = extractDockerSecretFromFile(System.getenv(postgresUserFile));
         } else
         {
@@ -76,12 +76,12 @@ public class Configuration {
             dbURL =  System.getenv(dbJdbcRootFile) + System.getenv(dbName);
         }
 
-        if (dockerIsBeingUsed)
+        if (theAppIsRunningInADockerContainer)
         {
-            logger.info("Use of the Docker PostgreSQL service");
+            logger.info("The app is running in a Docker container.");
         } else
         {
-            logger.info("Use of the installed PostgreSQL database");
+            logger.info("Use of the PostgreSQL Docker service alone");
         }
 
         // Todo :  to remove when debugged
@@ -89,6 +89,7 @@ public class Configuration {
         logInfoEnabled(logger, "System.getenv(POSTGRES_PASSWORD_FILE): %s", System.getenv(postgresPasswordFile));
         logInfoEnabled(logger, "System.getenv(POSTGRES_DB_FILE): %s", System.getenv(postgresDbFile));
         logInfoEnabled(logger, "System.getenv(DB_JDBC_ROOT_FILE): %s", System.getenv(dbJdbcRootFile));
+        logInfoEnabled(logger, "dbURL: *%s*", dbURL);
         logInfoEnabled(logger, "System.getenv(DB_USERNAME): %s", System.getenv(dbUsername));
         logInfoEnabled(logger, "System.getenv(DB_PASSWORD): %s", System.getenv(dbPassword));
         logInfoEnabled(logger, "System.getenv(DB_NAME): %s", System.getenv(dbName));
@@ -137,7 +138,9 @@ public class Configuration {
                 final String CORS_LOCALHOST_4200 = "http://localhost:4200";
                 // When running the app with Docker
                 final String CORS_LOOPBACK = "http://127.0.0.1";
-                String[] origins= {CORS_LOCALHOST_4200,CORS_LOOPBACK};
+                // When running the app on Azure
+                final String CORS_AZURE = "https://changemakers-matchmaking.azurewebsites.net";
+                String[] origins= {CORS_LOCALHOST_4200,CORS_LOOPBACK, CORS_AZURE};
                 // TODO : to restrict the methods
                 registry.addMapping("/projects").allowedOrigins(origins).allowedMethods("*");
             
