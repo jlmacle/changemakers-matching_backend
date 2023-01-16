@@ -1,0 +1,169 @@
+# Created at 2022-12-31T13:20:36.346
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:398)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+
+# Created at 2022-12-31T13:20:36.984
+Unexpected IOException with stream: 
+
+
+# Created at 2022-12-31T13:20:36.988
+Unexpected IOException with stream:   .   ____          _            __ _ _
+
+
+# Created at 2022-12-31T13:20:36.991
+Unexpected IOException with stream:  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+
+
+# Created at 2022-12-31T13:20:36.996
+Unexpected IOException with stream: ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+
+
+# Created at 2022-12-31T13:20:37.000
+Unexpected IOException with stream:  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+
+
+# Created at 2022-12-31T13:20:37.003
+Unexpected IOException with stream:   '  |____| .__|_| |_|_| |_\__, | / / / /
+
+
+# Created at 2022-12-31T13:20:37.007
+Unexpected IOException with stream:  =========|_|==============|___/=/_/_/_/
+
+
+# Created at 2022-12-31T13:20:37.011
+Unexpected IOException with stream:  :: Spring Boot ::                (v3.0.1)
+
+
+# Created at 2022-12-31T13:20:37.015
+Unexpected IOException with stream: 
+
+
+# Created at 2022-12-31T13:20:37.118
+Unexpected IOException with stream: - INFO  eMakerMatchmakingBackendApplicationTests : Starting ChangeMakerMatchmakingBackendApplicationTests using Java 17.0.5 with PID 2096 (started by jeanl in C:\_Synchronized_Code\_CM\changemakers-matchmaking_backend)
+-
+
+# Created at 2022-12-31T13:20:37.121
+Unexpected IOException with stream: - INFO  eMakerMatchmakingBackendApplicationTests : No active profile set, falling back to 1 default profile: "default"
+-
+
+# Created at 2022-12-31T13:20:38.272
+Unexpected IOException with stream: - INFO  .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+-
+
+# Created at 2022-12-31T13:20:38.416
+Unexpected IOException with stream: - INFO  .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 118 ms. Found 1 JPA repository interfaces.
+-
+
+# Created at 2022-12-31T13:20:39.069
+Unexpected IOException with stream: - INFO  cm.Configuration                         : Entering getDataSource()
+-
+
+# Created at 2022-12-31T13:20:39.071
+Unexpected IOException with stream: - INFO  cm.Configuration                         : Use of the installed PostgreSQL database
+-
+
+# Created at 2022-12-31T13:20:39.072
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(POSTGRES_USER_FILE): null
+-
+
+# Created at 2022-12-31T13:20:39.074
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(POSTGRES_PASSWORD_FILE): null
+-
+
+# Created at 2022-12-31T13:20:39.076
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(POSTGRES_DB_FILE): null
+-
+
+# Created at 2022-12-31T13:20:39.078
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(DB_JDBC_ROOT_FILE): jdbc:postgresql://localhost:5433/
+-
+
+# Created at 2022-12-31T13:20:39.080
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(DB_USERNAME): user
+-
+
+# Created at 2022-12-31T13:20:39.082
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(DB_PASSWORD): pwd
+-
+
+# Created at 2022-12-31T13:20:39.084
+Unexpected IOException with stream: - INFO  cm.Configuration                         : System.getenv(DB_NAME): db
+-
+
+# Created at 2022-12-31T13:20:39.308
+Unexpected IOException with stream: - INFO  o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+-
+
+# Created at 2022-12-31T13:20:39.440
+Unexpected IOException with stream: - INFO  org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+-
+
+# Created at 2022-12-31T13:20:39.697
+Unexpected IOException with stream: - WARN  org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+-
+
+# Created at 2022-12-31T13:20:39.987
+Unexpected IOException with stream: - INFO  com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+-
+
+# Created at 2022-12-31T13:20:40.353
+Unexpected IOException with stream: - INFO  com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@9263c54
+-
+
+# Created at 2022-12-31T13:20:40.364
+Unexpected IOException with stream: - INFO  com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+-
+
+# Created at 2022-12-31T13:20:40.442
+Unexpected IOException with stream: - INFO  SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+-
+
+# Created at 2022-12-31T13:20:41.963
+Unexpected IOException with stream: Hibernate: drop table if exists project cascade
+
+
+# Created at 2022-12-31T13:20:42.003
+Unexpected IOException with stream: Hibernate: create table project (project_id serial not null, project_name varchar(255), primary key (project_id))
+
+
+# Created at 2022-12-31T13:20:42.042
+Unexpected IOException with stream: - INFO  o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+-
+
+# Created at 2022-12-31T13:20:42.062
+Unexpected IOException with stream: - INFO  j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+-
+
+# Created at 2022-12-31T13:20:42.732
+Unexpected IOException with stream: - WARN  JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+-
+
+# Created at 2022-12-31T13:20:43.432
+Unexpected IOException with stream: - INFO  eMakerMatchmakingBackendApplicationTests : Started ChangeMakerMatchmakingBackendApplicationTests in 6.835 seconds (process running for 8.573)
+-
+
+# Created at 2022-12-31T13:20:43.547
+Unexpected IOException with stream: Hibernate: select p1_0.project_id,p1_0.project_name from project p1_0 where p1_0.project_id=?
+
+
+# Created at 2022-12-31T13:20:43.588
+Unexpected IOException with stream: Hibernate: insert into project (project_name) values (?)
+
+
+# Created at 2022-12-31T13:20:43.645
+Unexpected IOException: 5,1,cm.ChangeMakerMatchmakingBackendApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2022-12-31T13:20:44.047
+Unexpected IOException: 6,1,cm.ChangeMakerMatchmakingBackendApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2022-12-31T13:20:44.050
+Unexpected IOException: 2,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,cm.ChangeMakerMatchmakingBackendApplicationTests,null,null,null
+
+
