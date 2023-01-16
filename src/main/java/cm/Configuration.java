@@ -78,23 +78,20 @@ public class Configuration {
 
         if (theAppIsRunningInADockerContainer)
         {
-            logger.info("The app is running in a Docker container.");
+            logger.info("*The app is running in a Docker container.*");
         } else
         {
-            logger.info("Use of the PostgreSQL Docker service alone");
+            logger.info("*Use of the PostgreSQL Docker service alone*");
         }
 
         // Todo :  to remove when debugged
-        logInfoEnabled(logger, "System.getenv(POSTGRES_USER_FILE): %s", System.getenv(postgresUserFile));
-        logInfoEnabled(logger, "System.getenv(POSTGRES_PASSWORD_FILE): %s", System.getenv(postgresPasswordFile));
-        logInfoEnabled(logger, "System.getenv(POSTGRES_DB_FILE): %s", System.getenv(postgresDbFile));
-        logInfoEnabled(logger, "System.getenv(DB_JDBC_ROOT_FILE): %s", System.getenv(dbJdbcRootFile));
+        logInfoEnabled(logger, "System.getenv(DB_USERNAME): *%s*", System.getenv(dbUsername));
+        logInfoEnabled(logger, "System.getenv(DB_PASSWORD): *%s*", System.getenv(dbPassword));
+        logInfoEnabled(logger, "System.getenv(DB_NAME): *%s*", System.getenv(dbName));
         logInfoEnabled(logger, "dbURL: *%s*", dbURL);
-        logInfoEnabled(logger, "System.getenv(DB_USERNAME): %s", System.getenv(dbUsername));
-        logInfoEnabled(logger, "System.getenv(DB_PASSWORD): %s", System.getenv(dbPassword));
-        logInfoEnabled(logger, "System.getenv(DB_NAME): %s", System.getenv(dbName));
-
-
+        logInfoEnabled(logger, "dbUSERNAME: *%s*", dbUSERNAME);
+        logInfoEnabled(logger, "dbPASSWORD: *%s*", dbPASSWORD);
+        
         dataSourceBuilder.url(dbURL);
         dataSourceBuilder.username(dbUSERNAME);
         dataSourceBuilder.password(dbPASSWORD);
