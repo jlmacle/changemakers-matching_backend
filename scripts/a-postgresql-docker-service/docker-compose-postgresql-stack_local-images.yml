@@ -5,7 +5,7 @@ services:
     networks:
       - cm-network
     ports:
-      - target: 5432 #needed for the backend to be able to access the db when querying port 5431
+      - target: 5432 #needed for the backend to be able to access the db when querying
         published: 5431
     secrets:
       - POSTGRES_DB
