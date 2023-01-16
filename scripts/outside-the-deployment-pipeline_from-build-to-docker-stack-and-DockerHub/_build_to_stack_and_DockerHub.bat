@@ -12,7 +12,9 @@
 echo off
 
 echo **** Starting Docker Desktop.
-cmd /c "C:\Program Files\Docker\Docker\Docker Desktop.exe" 
+start cmd /c "C:\Program Files\Docker\Docker\Docker Desktop.exe" 
+echo Waiting for Docker Desktop to start
+timeout /T 60
 
 start docker_build_by_Spring.bat
 
