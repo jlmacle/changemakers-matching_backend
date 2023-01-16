@@ -8,7 +8,8 @@ services:
     networks:
       - cm-network  
     ports:
-      - published: 5432    
+      - target: 5432 # The port queried by the app   
+                     # and used in the Docker secret      
     secrets:      
       - POSTGRES_DB
       - POSTGRES_USER
