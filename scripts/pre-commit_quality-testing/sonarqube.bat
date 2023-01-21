@@ -1,5 +1,3 @@
-:: issue with finding StartSonar.bat in the path
-
 echo off
 
 echo **** Starting the SonarQube server.
