@@ -32,7 +32,9 @@ services:
       - cm-network 
     ports:
       - target: 8081
-        published: 8082    # 127.0.0.1:<published port> queried      
+        published: 8081    
+        mode: host # Fidgeting to get access to the published port
+        # 127.0.0.1:<published port> queried      
     secrets:
       - DB_JDBC_ROOT
       - POSTGRES_DB
