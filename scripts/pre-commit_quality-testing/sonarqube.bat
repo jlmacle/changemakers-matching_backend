@@ -7,6 +7,14 @@ start "SonarQube" StartSonar.bat
 echo **** Waiting for the SonarQube server to start
 timeout /T 90
 
-cd ..
+echo **** Pulling postgres:alpine
+docker pull postgres:alpine
+
+echo **** Starting a Docker PostgreSQL service with Docker stack
+docker stack deploy -c ../a-postgresql-docker-service/docker-compose-postgresql-stack_local-images.yml postgresql-stack_local-images
+
+timeout /T 90
+
+cd ../..
 echo **** Starting the code quality analysis.
 mvn clean verify sonar:sonar -Dsonar.projectKey=$CM_Backend-Sonarqube_project_key -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=$CM_Backend-Sonarqube_token
