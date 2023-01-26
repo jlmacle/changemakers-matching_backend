@@ -1,7 +1,7 @@
 echo off
 
 echo **** Starting Docker Desktop.
-start cmd /c "C:\Program Files\Docker\Docker\Docker Desktop.exe" 
+start "../_common/docker_start.bat"
 echo Waiting for Docker Desktop to start
 timeout /T 60
 

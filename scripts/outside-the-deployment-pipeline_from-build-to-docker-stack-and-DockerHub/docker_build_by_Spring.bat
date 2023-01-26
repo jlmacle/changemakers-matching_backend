@@ -5,6 +5,9 @@ echo off
 
 cd ../..
 
+echo **** Removing a potential PostgreSQL service that would have been created with the application stack
+docker stack rm demo0-stack_DockerHub-images
+
 echo **** Building the Docker image with spring-boot:build-image.
 cmd /c "mvn spring-boot:build-image"
 

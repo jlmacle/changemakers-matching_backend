@@ -1,15 +1,12 @@
-# Thanks to https://github.com/docker/awesome-compose/blob/master/spring-postgres/docker-compose.yaml
+# https://docs.docker.com/compose/networking/
 # https://docs.docker.com/compose/compose-file/compose-file-v3/#secrets
-# https://github.com/compose-spec/compose-spec/blob/master/spec.md
 version: "3.8"
 services:
   postgresql:
     image: postgres:alpine   
-    networks:
-      - cm-network  
-    ports:
+    ports:      
       - target: 5432 # The port queried by the app   
-                     # and used in the Docker secret      
+                     # and used in the Docker secret         
     secrets:      
       - POSTGRES_DB
       - POSTGRES_USER
@@ -27,12 +24,10 @@ services:
   backend:  
     depends_on:
       - postgresql
-    image: changemakers-matchmaking-backend:demo0
-    networks:
-      - cm-network 
+    image: changemakers-matchmaking-backend:demo0    
     ports:
       - target: 8081
-        published: 8082    # 127.0.0.1:<published port> queried      
+        published: 8081  # 127.0.0.1:<published port> queried 
     secrets:
       - DB_JDBC_ROOT
       - POSTGRES_DB
@@ -58,5 +53,3 @@ secrets:
     # either by running the docker secret create command or by another stack deployment.
     # https://docs.docker.com/compose/compose-file/compose-file-v3/#secrets
     
-networks:
-  cm-network: 
