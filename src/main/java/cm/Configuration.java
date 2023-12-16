@@ -88,6 +88,7 @@ public class Configuration {
         logInfoEnabled(logger, "System.getenv(DB_USERNAME): *%s*", System.getenv(dbUsername));
         logInfoEnabled(logger, "System.getenv(DB_PASSWORD): *%s*", System.getenv(dbPassword));
         logInfoEnabled(logger, "System.getenv(DB_NAME): *%s*", System.getenv(dbName));
+        logInfoEnabled(logger, "System.getenv(DB_JDBC_ROOT_FILE): *%s*", System.getenv(dbJdbcRootFile));
         logInfoEnabled(logger, "dbURL: *%s*", dbURL);
         logInfoEnabled(logger, "dbUSERNAME: *%s*", dbUSERNAME);
         logInfoEnabled(logger, "dbPASSWORD: *%s*", dbPASSWORD);
@@ -139,7 +140,9 @@ public class Configuration {
                 final String CORS_AZURE = "https://changemakers-matchmaking.azurewebsites.net";
                 String[] origins= {CORS_LOCALHOST_4200,CORS_LOOPBACK, CORS_AZURE};
                 // TODO : to restrict the methods
-                registry.addMapping("/projects").allowedOrigins(origins).allowedMethods("*");
+                // registry.addMapping("/projects").allowedOrigins(origins).allowedMethods("*");
+                // TODO : to restrict the origins (used to avoid the cors policy issue when the hml file is aceessed on the file:// protocol)
+                registry.addMapping("/projects").allowedOrigins("*").allowedMethods("*");
             
             }
 		};
