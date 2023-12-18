@@ -6,8 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,6 +22,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @org.springframework.context.annotation.Configuration
 public class Configuration {	
 	private static Logger logger = LoggerFactory.getLogger(Configuration.class);
+    private static final String ENDPOINT_PROJECTS = "/projects";
+    private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributor_newacc";
+    private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representative_newacc";
 
     /**
      * Retrieves database information and credentials from environment variables.
@@ -64,12 +71,38 @@ public class Configuration {
          
                 // TODO : to restrict the origins (used to avoid the cors policy issue when the hml file is aceessed on the file:// protocol)
                 // Might be possible to get the File protocol to be accepted in the allowed origins list
-                registry.addMapping("/projects").allowedOrigins("*").allowedMethods("*");
-                registry.addMapping("/contributor_auth").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins("*").allowedMethods("*");
+                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins("*").allowedMethods("*");
+                registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins("*").allowedMethods("*");
             
             }
 		};
 	}
+
+    @Bean 
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+        // SpringSecurity doesn't allow POST requests if not explicitly allowed
+        .csrf( csrf -> 
+            {
+                csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_CONTRIBUTOR_NEWACC, "POST") );
+                csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_REPRESENTATIVE_NEWACC, "POST") );
+            }
+        )
+        .authorizeHttpRequests
+            ( authz -> authz
+            // To allow access to endpoint without asking for authentication
+            .requestMatchers(ENDPOINT_PROJECTS).permitAll() // TODO: To remove later 
+            .requestMatchers(ENDPOINT_CONTRIBUTOR_NEWACC).permitAll() // TODO: To check how to restrict the permitAll
+            .requestMatchers(ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
+            // In all other cases, authentication is required
+            .anyRequest().authenticated()
+            )
+        .httpBasic( withDefaults() );
+
+        return http.build();
+
+    }
 	
     @Bean
     public PasswordEncoder passwordEncoder() {
