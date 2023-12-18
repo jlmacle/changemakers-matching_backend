@@ -14,17 +14,10 @@
 	<name>changemakers-matchmaking-backend</name>
 	<description>Backend for the changemakers matchmaking project</description>
 
-	<properties>
-		<!-- Not a necessity to use Java 21 -->
-		<java.version>8</java.version>
-		<maven.compiler.source>8</maven.compiler.source>
-    	<maven.compiler.target>8</maven.compiler.target>
-		<!-- Testing modifying java version in build.yml -->
-
-		<!-- SonarCloud configuration debug -->
-		<!--  if 17 -> invalid target release: 12,13,14,15,16,17,18 -->
-		<!--  if 11, spring-boot-3.0.1.jar, class file has wrong version 61.0, should be 55.0 -->
-		<!--  https://spring.io/blog/2022/05/24/preparing-for-spring-boot-3-0 -->
+	<properties>		
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+    	<maven.compiler.target>17</maven.compiler.target>
 		
 		<sonar.organization>jlmacle</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -60,6 +53,14 @@
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
 		    <version>2.0.6</version>
+		</dependency>
+
+		<!-- To convert from objects to JSON  -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.16.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
