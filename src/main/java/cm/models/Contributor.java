@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 //TODO : to avoid personal data in the demo, use of prerecorded data when testing the creation of a new user
 
 @Entity
-@Table(name="contributor")
+@Table(name="contributors")
 public class Contributor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +37,13 @@ public class Contributor {
 	//  Source: https://spring.io/guides/gs/accessing-data-jpa/
     protected Contributor() {
         super();
+    }
+
+    public static Contributor createContributor(String username, String password){
+        Contributor contributor = new Contributor();
+        contributor.setUsername(username);
+        contributor.setPassword(password);
+        return contributor;
     }
 
 
@@ -96,5 +103,11 @@ public class Contributor {
         this.lastname = lastname;
     }
 
+    @Override
+    public String toString() {
+        return "Contributor [ username=" + username + ", firstname=" + firstname + ", lastname=" + lastname + "]";
+    }
+
+    
     
 }

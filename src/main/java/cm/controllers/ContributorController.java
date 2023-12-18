@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import cm.models.Contributor;
 import cm.repositories.ContributorsRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,18 +30,21 @@ public class ContributorController {
     /** A method used to retrieve contributor data when authentication succeeds.
      * 
      */
-    @PostMapping("/contributor_auth")
+    @PostMapping("/contributor_newacc")
     public String authenthicator(@RequestBody Map<String, String> credentials) {
 
-        // String username = credentials.get("username");
-        // String encodedPassword = passwordEncoder.encode(credentials.get("password"));
-
-        // Contributor contributor = new Contributor();
-        // contributor.setUsername(username);
-        // contributor.setPassword(encodedPassword);
-        // contributorRepository.save(contributor);
+        String username = credentials.get("username");
+        String encodedPassword = passwordEncoder.encode(credentials.get("password"));
+        // Checking if the username already exists
+        if (contributorRepository.findByUsername(username) != null) {
+            return "Username already exists";
+        }
+        else {
+            Contributor contributor = Contributor.createContributor(username, encodedPassword);
+            contributorRepository.save(contributor);        
+            return "New account created successfully";
+        }
         
-        return "Authentification successfull";
     }
     
 
