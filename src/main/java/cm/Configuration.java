@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,14 +19,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * Class used to configure the application
  */
-
+//TODO: to understand why @Configuration is not working
 @org.springframework.context.annotation.Configuration
 public class Configuration {	
 	private static Logger logger = LoggerFactory.getLogger(Configuration.class);
     private static final String ENDPOINT_PROJECTS = "/projects";
-    private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributor_newacc";
-    private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representative_newacc";
+    private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributors/new-account";
+    private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representatives/new-account";
 
+
+    private static final String CORS_LOOPBACK3000_LIVEPREVIEW = "http://127.0.0.1:3000";
     /**
      * Retrieves database information and credentials from environment variables.
      * @return a DataSource object
@@ -69,11 +72,11 @@ public class Configuration {
 			public void addCorsMappings(CorsRegistry registry)
 			{
          
-                // TODO : to restrict the origins (used to avoid the cors policy issue when the hml file is aceessed on the file:// protocol)
-                // Might be possible to get the File protocol to be accepted in the allowed origins list
-                registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins("*").allowedMethods("*");
-                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins("*").allowedMethods("*");
-                registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins("*").allowedMethods("*");
+                String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW};
+
+                registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins(origins).allowedMethods("GET");
+                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins(origins).allowedMethods("POST");
+                registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins(origins).allowedMethods("POST");
             
             }
 		};
@@ -92,9 +95,9 @@ public class Configuration {
         .authorizeHttpRequests
             ( authz -> authz
             // To allow access to endpoint without asking for authentication
-            .requestMatchers(ENDPOINT_PROJECTS).permitAll() // TODO: To remove later 
-            .requestMatchers(ENDPOINT_CONTRIBUTOR_NEWACC).permitAll() // TODO: To check how to restrict the permitAll
-            .requestMatchers(ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
+            // .requestMatchers(HttpMethod.GET, ENDPOINT_PROJECTS).permitAll()
+            .requestMatchers(HttpMethod.POST,ENDPOINT_CONTRIBUTOR_NEWACC).permitAll()
+            .requestMatchers(HttpMethod.POST,ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
             // In all other cases, authentication is required
             .anyRequest().authenticated()
             )
