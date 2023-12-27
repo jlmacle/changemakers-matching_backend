@@ -17,7 +17,7 @@ public class Project implements Comparable<Object>
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="project_id")
-	private Integer id;
+	private Integer projectId;
 	
 	@Column(name="project_name")
 	private String name;
@@ -67,13 +67,16 @@ public class Project implements Comparable<Object>
 	@Column(name="project_representative_notes")
 	private String representativeNotes;
 
-	@OneToMany(targetEntity=SDGGoals.class,mappedBy="sdg_goal_id")
+	@OneToMany(targetEntity=SDGGoals.class,mappedBy="sdgGoalId")
 	private List<SDGGoals> sdgGoals;
 
-	@OneToMany(targetEntity=Language.class,mappedBy="language_id")
+	@OneToMany(targetEntity=Language.class,mappedBy="languageId")
 	private List<Language> languages;
 
-	@OneToMany(targetEntity=ProjectNeed.class,mappedBy="project_need_id")
+	@Column(name="preferred_language")
+	private Integer preferredLanguage;
+
+	@OneToMany(targetEntity=ProjectNeed.class,mappedBy="projectNeedId")
 	private List<ProjectNeed> projectNeeds;
 	
 	//  "The default constructor exists only for the sake of JPA. 
@@ -85,20 +88,20 @@ public class Project implements Comparable<Object>
 
 	public Project(Integer projectId, String projectName) {
 		super();
-		this.id = projectId;
+		this.projectId = projectId;
 		this.name = projectName;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getProjectId() {
+		return projectId;
 	}
 
 	public String getName() {
 		return name;
 	}
 	
-	public void setId(Integer projectId) {
-		this.id = projectId;
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
 	}
 
 	public void setName(String projectName) {
@@ -118,13 +121,13 @@ public class Project implements Comparable<Object>
 
 		if (object.getClass() != Project.class) {return false;}
 
-		return this.getId().equals(((Project)object).getId()) && this.getName().equals(((Project)object).getName());
+		return this.getProjectId().equals(((Project)object).getProjectId()) && this.getName().equals(((Project)object).getName());
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return this.getId().hashCode() + 1000000*this.getName().hashCode();
+		return this.getProjectId().hashCode() + 1000000*this.getName().hashCode();
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class ProjectNeed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="project_need_id")
-    private Integer id;
+    private Integer projectNeedId;
 
     @Column(name="project_need_name")
     private String name;
@@ -23,12 +23,12 @@ public class ProjectNeed {
         super();
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getProjectNeedId() {
+        return projectNeedId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProjectNeedId(Integer id) {
+        this.projectNeedId = id;
     }
 
     public String getName() {

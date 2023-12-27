@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -19,10 +20,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * Class used to configure the application
  */
-//TODO: to understand why @Configuration is not working
-@org.springframework.context.annotation.Configuration
-public class Configuration {	
-	private static Logger logger = LoggerFactory.getLogger(Configuration.class);
+@Configuration
+public class AppConfiguration {	
+	private static Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
     private static final String ENDPOINT_PROJECTS = "/projects";
     private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributors/new-account";
     private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representatives/new-account";
@@ -75,8 +75,8 @@ public class Configuration {
                 String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW};
 
                 registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins(origins).allowedMethods("GET");
-                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins(origins).allowedMethods("POST");
-                registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins(origins).allowedMethods("POST");
+                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins(origins).allowedMethods("POST", "OPTIONS");
+                registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins(origins).allowedMethods("POST", "OPTIONS");
             
             }
 		};
@@ -95,8 +95,10 @@ public class Configuration {
         .authorizeHttpRequests
             ( authz -> authz
             // To allow access to endpoint without asking for authentication
-            // .requestMatchers(HttpMethod.GET, ENDPOINT_PROJECTS).permitAll()
+            .requestMatchers(HttpMethod.GET, ENDPOINT_PROJECTS).permitAll()
+            .requestMatchers(HttpMethod.OPTIONS,ENDPOINT_CONTRIBUTOR_NEWACC).permitAll()
             .requestMatchers(HttpMethod.POST,ENDPOINT_CONTRIBUTOR_NEWACC).permitAll()
+            .requestMatchers(HttpMethod.OPTIONS,ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
             .requestMatchers(HttpMethod.POST,ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
             // In all other cases, authentication is required
             .anyRequest().authenticated()

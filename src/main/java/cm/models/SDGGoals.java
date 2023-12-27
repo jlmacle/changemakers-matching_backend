@@ -14,7 +14,7 @@ public class SDGGoals {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="sdg_goal_id")
-    private Integer id;
+    private Integer sdgGoalId;
 
     @Column(name="sdg_goal_name")
     private String name;

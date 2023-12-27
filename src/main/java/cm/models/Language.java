@@ -14,7 +14,7 @@ public class Language {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="language_id")
-    private Integer id;
+    private Integer languageId;
 
     @Column(name="language_name")
     private String name;
@@ -29,12 +29,21 @@ public class Language {
         super();        
     }
 
-    public Integer getId() {
-        return id;
+    
+
+    public Language(Integer id, String name) {
+        this.languageId = id;
+        this.name = name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+
+
+    public Integer getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(Integer id) {
+        this.languageId = id;
     }
 
     public String getName() {

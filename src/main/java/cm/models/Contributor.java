@@ -7,8 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-//TODO : to avoid personal data in the demo, use of prerecorded data when testing the creation of a new user
-
 @Entity
 @Table(name="contributors")
 public class Contributor {

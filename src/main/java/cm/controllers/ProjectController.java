@@ -27,8 +27,8 @@ public class ProjectController
 	 * @return a list of Project objects
 	 */
 	@GetMapping("/projects")
-	public List<Project> getProjects()
-	{
+	public List<Project> getProjects()	{	
+
 		List<Project> list = repository.findAll();
 		Collections.sort(list);
 		return list;

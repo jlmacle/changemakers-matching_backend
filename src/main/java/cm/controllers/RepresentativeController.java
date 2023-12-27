@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,15 +37,21 @@ public class RepresentativeController {
     /** A method used to retrieve representative data when authentication succeeds.
      * 
      */
-     @PostMapping("/representative_newacc")
-     public String authenthicator(@RequestBody Map<String, String> credentials) {
+    // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html
+    // https://rules.sonarsource.com/java/RSPEC-3752/?search=OWASP
+    // Using @PostMapping instead of @RequestMapping is a best practice of application security.
+     @PostMapping("/representatives/new-account")
+     public ResponseEntity<String> createAccount(@RequestBody Map<String, String> credentials) {
 
          String username = credentials.get("username");
          String encodedPassword = passwordEncoder.encode(credentials.get("password"));
          // Checking if the username already exists
          if (representativeRepository.findByUsername(username) != null) {
-             return "Username already exists";
+            return ResponseEntity
+               .status(HttpStatus.CONFLICT) // HTTP 409 Conflict
+               .body("Username already exists");
          }
+             
          else {
             Representative representative = Representative.createRepresentative(username, encodedPassword);
             Representative rep = representativeRepository.save(representative);                
@@ -55,16 +63,16 @@ public class RepresentativeController {
             String jsonString="";
             try {
                 jsonString = mapper.writeValueAsString(repDTO);
-            } catch (JsonProcessingException e) {
-                // TODO Auto-generated catch block
-                // TODO : logging level to set
-                if (logger.isInfoEnabled()) { logger.info("Error while parsing JSON"); }
+            } catch (JsonProcessingException e) {                
+                if (logger.isErrorEnabled()) { logger.error("Error while parsing JSON: {}", e.getMessage()); }
                 e.printStackTrace();
-            }
+            }            
 
-            if (logger.isInfoEnabled()) { logger.info(String.format("New account created for representative: %s",repDTO.toString())); }   
-            return jsonString;
-         }
+            return ResponseEntity
+            .status(HttpStatus.CREATED) // HTTP 201 Created
+            .body(jsonString); // Assuming jsonString is a well-formed JSON string
+        }
+         
          
      }    
 }

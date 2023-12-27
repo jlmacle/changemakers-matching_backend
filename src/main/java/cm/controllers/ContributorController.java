@@ -1,16 +1,18 @@
 package cm.controllers;
 
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cm.models.Contributor;
 import cm.repositories.ContributorsRepository;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -30,19 +32,24 @@ public class ContributorController {
     /** A method used to retrieve contributor data when authentication succeeds.
      * 
      */
-    @PostMapping("/contributor_newacc")
-    public String authenthicator(@RequestBody Map<String, String> credentials) {
+
+    @PostMapping("/contributors/new-account")
+    public ResponseEntity<String> createAccount(@RequestBody Map<String, String> credentials) {
 
         String username = credentials.get("username");
         String encodedPassword = passwordEncoder.encode(credentials.get("password"));
         // Checking if the username already exists
         if (contributorRepository.findByUsername(username) != null) {
-            return "Username already exists";
+            return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body("Username already exists");
         }
         else {
             Contributor contributor = Contributor.createContributor(username, encodedPassword);
             contributorRepository.save(contributor);        
-            return "New account created successfully";
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("New account created successfully");
         }
         
     }
