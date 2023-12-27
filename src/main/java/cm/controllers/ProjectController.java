@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,16 +16,19 @@ public class ProjectController
 {
 	Logger logger = LoggerFactory.getLogger(ProjectController.class);
 	
-	@Autowired
-	ProjectsRepository repository;
+	private final ProjectsRepository repository;
+
+	public ProjectController(ProjectsRepository repository) {
+		this.repository = repository;
+	}
 	
 	/**
 	 * A method used to find all the project data stored in the database
 	 * @return a list of Project objects
 	 */
 	@GetMapping("/projects")
-	public List<Project> getProjects()
-	{
+	public List<Project> getProjects()	{	
+
 		List<Project> list = repository.findAll();
 		Collections.sort(list);
 		return list;

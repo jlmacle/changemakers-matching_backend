@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import cm.models.Language;
 import cm.models.Project;
+import cm.repositories.LanguagesRepository;
 import cm.repositories.ProjectsRepository;
 
 /**
@@ -26,10 +28,13 @@ public class ChangeMakerMatchmakingBackendApplication {
     * @return a CommandLineRunner interface
     */
 	@Bean
-    CommandLineRunner createATestProjectAtStartup(ProjectsRepository repository) {
+    CommandLineRunner populateDataAtStartup(ProjectsRepository projRepository,LanguagesRepository langRepository ) {
         return args -> {
             Project testProject = new Project(1, "test project");
-            repository.save(testProject);
+            projRepository.save(testProject);
+
+            Language english = new Language(1, "English");
+            langRepository.save(english);
         };
     }
 
