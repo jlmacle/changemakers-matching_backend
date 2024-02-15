@@ -29,6 +29,10 @@ public class AppConfiguration {
 
 
     private static final String CORS_LOOPBACK3000_LIVEPREVIEW = "http://127.0.0.1:3000";
+    private static final String CORS_LOOPBACK3001_LIVEPREVIEW = "http://127.0.0.1:3001";
+    private static final String CORS_LOOPBACK3002_LIVEPREVIEW = "http://127.0.0.1:3002";
+    private static final String CORS_LOOPBACK_LIGHTTPD = "http://127.0.0.1";
+    
     /**
      * Retrieves database information and credentials from environment variables.
      * @return a DataSource object
@@ -72,7 +76,8 @@ public class AppConfiguration {
 			public void addCorsMappings(CorsRegistry registry)
 			{
          
-                String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW};
+                String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW, CORS_LOOPBACK3001_LIVEPREVIEW,
+                    CORS_LOOPBACK3002_LIVEPREVIEW, CORS_LOOPBACK_LIGHTTPD};
 
                 registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins(origins).allowedMethods("GET");
                 registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins(origins).allowedMethods("POST", "OPTIONS");
