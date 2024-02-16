@@ -32,6 +32,7 @@ public class RepresentativeController {
     public RepresentativeController(PasswordEncoder passwordEncoder, RepresentativesRepository representativeRepository) {
         this.passwordEncoder = passwordEncoder;
         this.representativeRepository = representativeRepository;
+        
     }
 
     /** A method used to retrieve representative data when authentication succeeds.
