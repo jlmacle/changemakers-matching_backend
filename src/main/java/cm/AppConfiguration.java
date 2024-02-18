@@ -41,24 +41,20 @@ public class AppConfiguration {
     @Bean
     DataSource getDataSource() {
         logger.info("Entering getDataSource()");        
+
         // DB_URL contains the value of the JDBC URL
-        // jdbc:postgresql://<hostname>:<port>/<databasename>      
-        String envDbJdbcRootFile = "DB_JDBC_ROOT_FILE";
-        String envDbUsername = "DB_USERNAME";
-        String envDbPassword = "DB_PASSWORD";
-        String envDbName = "DB_NAME";
-        String dbURL = null;
-        String dbUSERNAME = null;
-        String dbPASSWORD = null;
+        // jdbc:postgresql://<hostname>:<port>/<databasename> 
+       
+        String postgresPort = System.getenv("DB_POSTGRES_PORT");
+        String dbName = System.getenv("DB_NAME");
+        String jdbcURL = "jdbc:postgresql://localhost:"+postgresPort+"/"+dbName;
+        String dbUSERNAME = System.getenv("DB_USERNAME");
+        String dbPASSWORD = System.getenv("DB_PASSWORD");
 
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");       			
         
-        dbUSERNAME = System.getenv(envDbUsername);
-        dbPASSWORD = System.getenv(envDbPassword);
-        dbURL =  System.getenv(envDbJdbcRootFile) + System.getenv(envDbName);
-     
-        dataSourceBuilder.url(dbURL);
+        dataSourceBuilder.url(jdbcURL);
         dataSourceBuilder.username(dbUSERNAME);
         dataSourceBuilder.password(dbPASSWORD);
         return dataSourceBuilder.build();
