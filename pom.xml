@@ -5,6 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- https://www.baeldung.com/spring-boot-starter-parent -->
+		<!-- "provides default configurations for Maven plugins" -->
 		<version>3.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
@@ -24,6 +26,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- ********************* Spring Boot Dev Tools ********************* -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 		<!-- For live reload, e.g.: https://www.baeldung.com/spring-boot-devtools -->
 		<dependency>
@@ -32,9 +35,12 @@
 			<version>3.2.1</version>
 		</dependency>
 
+		<!-- ********************* Spring Boot Starters ********************* -->
+		<!-- https://www.baeldung.com/spring-boot-starters -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- For REST services -->
 			<version>3.2.1</version>
 		</dependency>		
 
@@ -42,19 +48,25 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<!-- For data persistence -->
 			</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<!-- For a default security configuration -->
+			<version>3.1.7</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.1.7</version>
-		</dependency>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<!-- For testing -->
+			<scope>test</scope>
+		</dependency>		
+
+		<!-- ********************* Logging ********************* -->
+		<!-- https://logback.qos.ch/manual/introduction.html -->
 
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
@@ -70,32 +82,14 @@
 		</dependency>
 
 
-		<!-- To convert from objects to JSON  -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
+		<!-- ********************* PostgreSQL ********************* -->
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>			
+			<artifactId>postgresql</artifactId>
+			<version>42.7.2</version>
 		</dependency>
-	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>					    		    		    
-			        <layers>
-			            <enabled>true</enabled>
-			        </layers>
-			    </configuration>
-			</plugin>
-		</plugins>
-	</build>
+	</dependencies>
 
 </project>
