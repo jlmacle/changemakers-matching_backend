@@ -44,6 +44,7 @@ public class RepresentativeController {
      @PostMapping("/representatives/new-account")
      public ResponseEntity<String> createAccount(@RequestBody Map<String, String> credentials) {
 
+        
          String username = credentials.get("username");
          String encodedPassword = passwordEncoder.encode(credentials.get("password"));
          // Checking if the username already exists
@@ -54,6 +55,8 @@ public class RepresentativeController {
          }
              
          else {
+           /* Planning to monitor  if the frontend validation has been bypassed 
+           (using Postman e.g.) */
             Representative representative = Representative.createRepresentative(username, encodedPassword);
             Representative rep = representativeRepository.save(representative);                
             RepresentativeDTO repDTO = new RepresentativeDTO();

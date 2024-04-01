@@ -1,0 +1,19 @@
+To take into account in the development:
+
+
+Sources:
+* The Web application hacker's handbook, 2nd edition, Daffyd Stuttard, Marcus Pinto
+
+"The majority of attacks against web applications involving sending input to the server
+that is crafted to cause some event that was not expected or desired by the application's designer.
+Here are some examples of submitting crafted input to achieve this objective:
+- Changing the price of a product transmitted in a hidden HTML form field 
+to fraudulently purchase the product for a cheaper amount.
+- Modifying a session token transmitted in an HTTP cookie
+to hijack the session of another authenticated user.
+- Removing certain parameters that normally are submitted 
+to exploit a logic flaw in the application's processing.
+- Altering some input that will be processed by a back-end database 
+to inject a malicious database query and access sensitive data. 
+"
+
