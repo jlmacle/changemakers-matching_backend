@@ -14,6 +14,5 @@ to hijack the session of another authenticated user.
 - Removing certain parameters that normally are submitted 
 to exploit a logic flaw in the application's processing.
 - Altering some input that will be processed by a back-end database 
-to inject a malicious database query and access sensitive data. 
-"
+to inject a malicious database query and access sensitive data.", p.9
 
