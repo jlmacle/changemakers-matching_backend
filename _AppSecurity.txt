@@ -16,3 +16,6 @@ to exploit a logic flaw in the application's processing.
 - Altering some input that will be processed by a back-end database 
 to inject a malicious database query and access sensitive data.", p.9
 
+"In terms of attack surface,
+the session management mechanism is higly dependent
+on the security of its tokens.", p.20
