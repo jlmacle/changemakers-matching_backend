@@ -14,10 +14,10 @@ import cm.repositories.ProjectsRepository;
  * The class to run as a SpringBoot app to start the backend service
  */
 @SpringBootApplication
-public class ChangeMakerMatchmakingBackendApplication {
+public class ChangeMakerMatchingBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChangeMakerMatchmakingBackendApplication.class, args);
+		SpringApplication.run(ChangeMakerMatchingBackendApplication.class, args);
 	}
 
     
