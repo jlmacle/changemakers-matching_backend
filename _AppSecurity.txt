@@ -19,3 +19,9 @@ to inject a malicious database query and access sensitive data.", p.9
 "In terms of attack surface,
 the session management mechanism is higly dependent
 on the security of its tokens.", p.20
+
+"Most web development languages provide good error-handling support
+through try-catch blocks and checked exceptions.
+Application code should make extensive use of these constructs
+to catch specific and general errors
+and handle them appropriately.", p. 30
