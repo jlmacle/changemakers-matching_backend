@@ -4,8 +4,9 @@ To take into account in the development:
 Sources:
 * The Web application hacker's handbook, 2nd edition, Daffyd Stuttard, Marcus Pinto
 
-"The majority of attacks against web applications involving sending input to the server
-that is crafted to cause some event that was not expected or desired by the application's designer.
+"The majority of attacks against web applications 
+involve sending input to the server that is crafted to cause some event 
+that was not expected or desired by the application's designer.
 Here are some examples of submitting crafted input to achieve this objective:
 - Changing the price of a product transmitted in a hidden HTML form field 
 to fraudulently purchase the product for a cheaper amount.
@@ -17,7 +18,7 @@ to exploit a logic flaw in the application's processing.
 to inject a malicious database query and access sensitive data.", p.9
 
 "In terms of attack surface,
-the session management mechanism is higly dependent
+the session management mechanism is highly dependent
 on the security of its tokens.", p.20
 
 "Most web development languages provide good error-handling support
@@ -26,5 +27,6 @@ Application code should make extensive use of these constructs
 to catch specific and general errors
 and handle them appropriately.", p. 30
 
-"Most application servers can be configured to deal with unhandled application errors
-in customized ways such as by presenting an uninformative error message.", p.30
+"Most application servers can be configured 
+to deal with unhandled application errors in customized ways 
+such as by presenting an uninformative error message.", p.30
