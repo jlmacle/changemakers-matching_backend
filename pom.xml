@@ -49,7 +49,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<!-- For data persistence -->
-			</dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +57,29 @@
 			<!-- For a default security configuration -->
 			<version>3.1.9</version>
 		</dependency>
+
+		<!-- Spring security: the following configuration leads to a failed start: to be investigated -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<!-- <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>6.2.4</version>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<!-- <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>6.2.4</version>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<!-- <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>6.2.4</version>
+		</dependency> -->
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
