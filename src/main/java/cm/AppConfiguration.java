@@ -30,6 +30,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AppConfiguration {	
 	private static Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
+    private final boolean debug = logger.isInfoEnabled();
+
     private static final String ENDPOINT_PROJECTS = "/projects";
     private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributors/new-account";
     private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representatives/new-account";
@@ -47,7 +49,7 @@ public class AppConfiguration {
      */
     @Bean
     DataSource getDataSource() {
-        logger.info("Entering getDataSource()");        
+        if (debug) logger.info("Entering getDataSource()");        
 
         // DB_URL contains the value of the JDBC URL
         // jdbc:postgresql://<hostname>:<port>/<databasename> 
@@ -121,11 +123,6 @@ public class AppConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-	public static void logInfoEnabled(Logger logger, String msg, String data)
-	{
-		if (logger.isInfoEnabled()) logger.info(String.format(msg, data));
-	}
 
 }
 
