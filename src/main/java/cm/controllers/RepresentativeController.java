@@ -24,7 +24,8 @@ import cm.repositories.RepresentativesRepository;
 @RestController
 public class RepresentativeController {
     
-    Logger logger = LoggerFactory.getLogger(getClass());     
+    Logger logger = LoggerFactory.getLogger(getClass());    
+    private final boolean debug = logger.isErrorEnabled(); 
 
     private final PasswordEncoder passwordEncoder;
     private final RepresentativesRepository representativeRepository;
@@ -68,7 +69,7 @@ public class RepresentativeController {
             try {
                 jsonString = mapper.writeValueAsString(repDTO);
             } catch (JsonProcessingException e) {                
-                if (logger.isErrorEnabled()) { logger.error("Error while parsing JSON: {}", e.getMessage()); }
+                if (debug) { logger.error("Error while parsing JSON: {}", e.getMessage()); }
                 e.printStackTrace();
             }            
 
