@@ -21,11 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Class used to configure the application
  */
 
-/* TODO: "remember me" configuration
- * Objective to have daily green squares as a proof of perseverance
- * while aiming at quality code.
- * Simple tasks planned for green square and quality, 
- * while building understanding of Spring Security.
+/* TODO: "remember me" configuration 
  */
 @Configuration
 public class AppConfiguration {	
