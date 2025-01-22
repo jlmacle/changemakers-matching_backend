@@ -58,29 +58,6 @@
 			<version>3.1.9</version>
 		</dependency>
 
-		<!-- Spring security: the following configuration leads to a failed start: to be investigated -->
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>6.2.4</version>
-		</dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>6.2.4</version>
-		</dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>6.2.4</version>
-		</dependency> -->
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -97,12 +74,15 @@
 		    <artifactId>slf4j-api</artifactId>
 		   </dependency>
 
-		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
+	
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.5.13</version>
+			<artifactId>logback-classic</artifactId>
+			<version>1.5.16</version>
+			<scope>test</scope>
 		</dependency>
+
 
 
 		<!-- ********************* PostgreSQL ********************* -->
@@ -114,24 +94,6 @@
 		</dependency>
 
 	</dependencies>
-	<!-- uses default configuration -->
-	<build>
-		<plugins>
-			<plugin>
-			<!-- Creates CycloneDX Software Bill of Materials (SBOM) from Maven projects  -->
-			<!-- https://github.com/CycloneDX/cyclonedx-maven-plugin -->
-				<groupId>org.cyclonedx</groupId>
-				<artifactId>cyclonedx-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>makeAggregateBom</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	
 
 </project>
