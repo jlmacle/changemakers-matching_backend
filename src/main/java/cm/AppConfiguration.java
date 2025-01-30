@@ -91,7 +91,7 @@ public class AppConfiguration {
     @Bean 
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        // SpringSecurity doesn't allow POST requests if not explicitly allowed
+        // Temporary, to allow POST requests. A security hotspot to fix.
         .csrf( csrf -> 
             {
                 csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_CONTRIBUTOR_NEWACC, "POST") );
