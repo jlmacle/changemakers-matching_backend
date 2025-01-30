@@ -65,11 +65,11 @@ public class AppConfiguration {
         return dataSourceBuilder.build();
 
     }
-	
-    
-	//https://spring.io/blog/2015/06/08/cors-support-in-spring-framework    
-	@Bean
-	public WebMvcConfigurer corsConfigurer()
+
+
+    //https://spring.io/blog/2015/06/08/cors-support-in-spring-framework    
+    @Bean
+    WebMvcConfigurer corsConfigurer()
 	{
 		return new WebMvcConfigurer() 
 		{	
@@ -88,8 +88,8 @@ public class AppConfiguration {
 		};
 	}
 
-    @Bean 
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
         // Temporary, to allow POST requests. A security hotspot to fix.
         .csrf( csrf -> 
@@ -114,9 +114,9 @@ public class AppConfiguration {
         return http.build();
 
     }
-	
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
