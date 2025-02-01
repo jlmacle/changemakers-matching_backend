@@ -6,9 +6,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name="contributors")
+@Getter
+@Setter
+@NoArgsConstructor // Instead of the default constructor, we use Lombok to generate a no-args constructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Contributor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,82 +44,12 @@ public class Contributor {
     @Column(name="contributor_lastname")
     private String lastname;
 
-    //  "The default constructor exists only for the sake of JPA. 
-	//  You do not use it directly, so it is designated as protected"
-	//  Source: https://spring.io/guides/gs/accessing-data-jpa/
-    protected Contributor() {
-        super();
-    }
+    @Version // Hibernate will automatically increment this field on update
+    private Integer version; 
 
-    public static Contributor createContributor(String username, String password){
-        Contributor contributor = new Contributor();
-        contributor.setUsername(username);
-        contributor.setPassword(password);
-        return contributor;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    public Contributor(String username, String password){
         this.username = username;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-
-
-    public void setPassword(String password) {
         this.password = password;
     }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-
-    public String getLastname() {
-        return lastname;
-    }
-
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    @Override
-    public String toString() {
-        return "Contributor [ username=" + username + ", firstname=" + firstname + ", lastname=" + lastname + "]";
-    }
-
-    
-    
+   
 }

@@ -45,7 +45,7 @@ public class ContributorController {
                 .body("Username already exists");
         }
         else {
-            Contributor contributor = Contributor.createContributor(username, encodedPassword);
+            Contributor contributor = new Contributor(username, encodedPassword);
             contributorRepository.save(contributor);        
             return ResponseEntity
                 .status(HttpStatus.CREATED)
