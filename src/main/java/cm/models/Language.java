@@ -6,9 +6,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name="languages")
+@Getter
+@Setter
+@NoArgsConstructor // Instead of the default constructor, we use Lombok to generate a no-args constructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Language {
 
     @Id
@@ -22,46 +36,12 @@ public class Language {
     @Column(name="preferred_language")
     private Boolean preferredLanguage;
 
-    //  "The default constructor exists only for the sake of JPA. 
-	//  You do not use it directly, so it is designated as protected"
-	//  Source: https://spring.io/guides/gs/accessing-data-jpa/
-    protected Language() {
-        super();        
-    }
+    @Version // Hibernate will automatically increment this field on update
+    private Integer version; 
 
-    
-
-    public Language(Integer id, String name) {
+    public Language(Integer id, String name, Integer version) {
         this.languageId = id;
         this.name = name;
+        this.version = version;
     }
-
-
-
-    public Integer getLanguageId() {
-        return languageId;
-    }
-
-    public void setLanguageId(Integer id) {
-        this.languageId = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getPreferredLanguage() {
-        return preferredLanguage;
-    }
-
-    public void setPreferredLanguage(Boolean preferredLanguage) {
-        this.preferredLanguage = preferredLanguage;
-    }
-    
-
-    
 }

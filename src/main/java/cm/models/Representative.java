@@ -6,9 +6,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name="representatives")
+@Getter
+@Setter
+@NoArgsConstructor // Instead of the default constructor, we use Lombok to generate a no-args constructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Representative {
     
     @Id
@@ -25,59 +39,11 @@ public class Representative {
     @Column(name="representative_email")
     private String email;
 
-    //  "The default constructor exists only for the sake of JPA.
-    //  You do not use it directly, so it is designated as protected"
-	//  Source: https://spring.io/guides/gs/accessing-data-jpa/
+    @Version // Hibernate will automatically increment this field on update
+    private Integer version; 
 
-    protected Representative() {
-        super();
-    }
-
-    public static Representative createRepresentative(String username, String password){
-        Representative representative = new Representative();
-        representative.setUsername(username);
-        representative.setPassword(password);
-        return representative;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    public Representative (String username, String password){
         this.username = username;
+        this.password = password;        
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Representative [ username=" + username+ "]";
-    }
-
-    
-    
-
 }

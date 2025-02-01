@@ -30,11 +30,15 @@ public class ChangeMakerMatchingBackendApplication {
 	@Bean
     CommandLineRunner populateDataAtStartup(ProjectsRepository projRepository,LanguagesRepository langRepository ) {
         return args -> {
-            Project testProject = new Project(1, "test project");
-            projRepository.save(testProject);
-
-            Language english = new Language(1, "English");
+            //Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [cm.models.Language#1]
+            // To be investigated later
+            /* Language english = new Language(1, "English", 1);
             langRepository.save(english);
+            
+            Project testProject = new Project(1, "test project", 1);
+            projRepository.save(testProject); */
+
+            
         };
     }
 
