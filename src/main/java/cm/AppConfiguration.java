@@ -8,6 +8,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.lang.NonNull;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+
 
 /**
  * Class used to configure the application
@@ -74,7 +77,7 @@ public class AppConfiguration {
 		return new WebMvcConfigurer() 
 		{	
 			@Override
-			public void addCorsMappings(CorsRegistry registry)
+            public void addCorsMappings(@NonNull CorsRegistry registry)
 			{
          
                 String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW, CORS_LOOPBACK3001_LIVEPREVIEW,
