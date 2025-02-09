@@ -73,6 +73,7 @@ class RepresentativeControllerTest {
         assertEquals("Username already exists", response.getBody());
     }
 
+    @SuppressWarnings("null")
     @Test
     void testCreateAccount_JsonProcessingException() throws JsonProcessingException {
         Map<String, String> credentials = new HashMap<>();
