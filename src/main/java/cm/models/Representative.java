@@ -27,7 +27,7 @@ public class Representative {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="represntative_id")
+    @Column(name="representative_id")
     private Integer id;
 
     @Column(name="representative_username")
