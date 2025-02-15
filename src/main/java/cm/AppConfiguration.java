@@ -1,5 +1,7 @@
 package cm;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -10,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.lang.NonNull;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * Class used to configure the application
+ * Class used to configure the application.
  */
 
 /* TODO: "remember me" configuration 
@@ -42,8 +43,8 @@ public class AppConfiguration {
     private static final String CORS_LOOPBACK_LIGHTTPD = "http://127.0.0.1";
     
     /**
-     * Retrieves database information and credentials from environment variables.
-     * @return a DataSource object
+     * Returns a connection to the physical data source, using environment variables and a JDBC URL.
+     * @return a DataSource object, a connection to the physical data source
      * https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html (Java 8)
      */
     @Bean
@@ -70,7 +71,10 @@ public class AppConfiguration {
     }
 
 
-    //https://spring.io/blog/2015/06/08/cors-support-in-spring-framework    
+    /**
+     * Configures CORS settings for the application.
+     * @return a WebMvcConfigurer object (to be developped)
+     */
     @Bean
     WebMvcConfigurer corsConfigurer()
 	{
@@ -91,6 +95,12 @@ public class AppConfiguration {
 		};
 	}
 
+    /**
+     * Configures security settings for the application.
+     * @param http the HttpSecurity object
+     * @return a SecurityFilterChain object
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -118,6 +128,10 @@ public class AppConfiguration {
 
     }
 
+    /**
+     * Provides a PasswordEncoder bean.
+     * @return a PasswordEncoder object
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

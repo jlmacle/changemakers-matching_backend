@@ -21,6 +21,9 @@ import cm.repositories.RepresentativesRepository;
 
 /* String sanitizations */
 
+/**
+ * Controller for handling representative-related requests.
+ */
 @RestController
 public class RepresentativeController {
     
@@ -30,20 +33,24 @@ public class RepresentativeController {
     private final PasswordEncoder passwordEncoder;
     private final RepresentativesRepository representativeRepository;
 
+    /**
+     * Constructor for RepresentativeController.
+     * @param passwordEncoder the password encoder
+     * @param representativeRepository the RepresentativesRepository object
+     */
     public RepresentativeController(PasswordEncoder passwordEncoder, RepresentativesRepository representativeRepository) {
         this.passwordEncoder = passwordEncoder;
         this.representativeRepository = representativeRepository;
         
     }
 
-    /** A method used to retrieve representative data when authentication succeeds.
-     * 
+    /**
+     * Creates a new representative account.
+     * @param credentials the credentials data structure containing username and password
+     * @return a ResponseEntity with the result of the account creation
      */
-    // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html
-    // https://rules.sonarsource.com/java/RSPEC-3752/?search=OWASP
-    // Using @PostMapping instead of @RequestMapping is a best practice of application security.
-     @PostMapping("/representatives/new-account")
-     public ResponseEntity<String> createAccount(@RequestBody Map<String, String> credentials) {
+    @PostMapping("/representatives/new-account")
+    public ResponseEntity<String> createAccount(@RequestBody Map<String, String> credentials) {
 
         
          String username = credentials.get("username");

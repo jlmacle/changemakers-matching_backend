@@ -15,6 +15,9 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+/**
+ * Represents a representative for a project.
+ */
 @Entity
 @Table(name="representatives")
 @Getter
@@ -25,23 +28,45 @@ import lombok.AllArgsConstructor;
 @EqualsAndHashCode
 public class Representative {
     
+    /**
+     * The unique identifier for the representative.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="representative_id")
     private Integer id;
 
+    /**
+     * The username of the representative.
+     */
     @Column(name="representative_username")
     private String username;
 
+    /**
+     * The password of the representative.
+     */
     @Column(name="representative_password")
     private String password;
 
+    /**
+     * The email of the representative.
+     */
     @Column(name="representative_email")
     private String email;
 
-    @Version // Hibernate will automatically increment this field on update
+    /**
+    * A field useful for Hibernate.
+     * Hibernate will automatically increment this field on update.
+     */
+    @Version
     private Integer version; 
 
+    /**
+     * Constructs a new Representative object with the specified username and password.
+     *
+     * @param username the username of the representative
+     * @param password the password of the representative
+     */
     public Representative (String username, String password){
         this.username = username;
         this.password = password;        
