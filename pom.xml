@@ -2,19 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- https://www.baeldung.com/spring-boot-starter-parent -->
-		<!-- "provides default configurations for Maven plugins" -->
-		<version>3.4.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+
 	<groupId>cm</groupId>
 	<artifactId>changemakers-matching-backend</artifactId>
-	<version>preDemo1</version>
-	<name>changemakers-matching-backend</name>
-	<description>Backend for the changemakers matching project</description>
+	<version>v0.5</version>
+	<name>Changemakers matching backend</name>
+	<description>Backend for the changemakers matching project. 
+	For a given project profile,
+	the idea of "Changemakers Matching" is to define project contributions needs.
+	Similarly, a contributor can define a profile
+	where s(he) defines the needs s(he) can meet,
+	and the types of projects s(he) would like to support.</description>
+	<url>https://github.com/jlmacle/changemakers-matching_backend</url>
+
+	<developers>
+		<developer>
+			<id>jl</id>
+			<name>JL</name>
+		</developer>
+	</developers>
 
 	<properties>		
 		<java.version>17</java.version>
@@ -24,6 +30,15 @@
 		<sonar.organization>jlmacle</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- https://www.baeldung.com/spring-boot-starter-parent -->
+		<!-- "provides default configurations for Maven plugins" -->
+		<version>3.4.2</version>
+		<relativePath/>
+	</parent>	
 
 	<dependencies>
 		<!-- ********************* Spring Boot Dev Tools ********************* -->
@@ -49,12 +64,15 @@
 			<!-- For data persistence -->
 		</dependency>		
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 			<!-- For a default security configuration -->
 		</dependency>
 
+		<!-- https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/html/boot-features-testing.html -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -73,15 +91,13 @@
 		</dependency>
 
 		<!-- ********************* Logging ********************* -->
-		<!-- https://logback.qos.ch/manual/introduction.html -->
-
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
 		   </dependency>
-
 	
+		<!-- https://logback.qos.ch/manual/introduction.html -->
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -97,16 +113,25 @@
 			<version>2.29.1</version>
 			<scope>test</scope>
 		</dependency>
-
-
+		
 		<!-- ********************* PostgreSQL ********************* -->
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
 	</dependencies>
-	
+
+	<!-- Maven reporting tools -->	
+	<reporting>
+		<plugins>
+		<!-- ********************* Maven reporting ********************* -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.21.0</version>
+			</plugin>			
+		</plugins>
+	</reporting>
 
 </project>
