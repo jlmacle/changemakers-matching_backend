@@ -5,3 +5,6 @@
 /.settings
 /bin
 /target
+
+allure-results/
+allure-report/
