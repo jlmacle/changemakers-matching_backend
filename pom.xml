@@ -15,6 +15,7 @@
 	and the types of projects s(he) would like to support.</description>
 	<url>https://github.com/jlmacle/changemakers-matching_backend</url>
 
+
 	<developers>
 		<developer>
 			<id>jl</id>
@@ -129,7 +130,34 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.21.0</version>
+				<version>3.21.0</version>							
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.8.0</version>
+				<reportSets>
+					<!-- 15 reports detected for maven-project-info-reports-plugin:3.8.0: 
+					ci-management, dependencies, dependency-info, dependency-management, 
+					distribution-management, index, issue-management, licenses, mailing-lists, 
+					modules, plugin-management, plugins, scm, summary, team -->
+					<!--  https://maven.apache.org/plugins/maven-project-info-reports-plugin/examples/selective-reports.html -->
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>summary</report>
+							<report>team</report>
+							<report>issue-management</report>
+							<!-- <report>ci-management</report> -->
+							<report>dependencies</report>
+							<report>dependency-info</report>
+							<report>dependency-management</report>							
+							<!-- <report>mailing-lists</report> -->
+							<report>ci-management</report>							
+							<!-- <report>scm</report -->
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>			
 		</plugins>
 	</reporting>
