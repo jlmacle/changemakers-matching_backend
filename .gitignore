@@ -8,3 +8,7 @@
 
 allure-results/
 allure-report/
+
+_scripts/.DS_Store
+
+_scripts/project-report_mvn-site-output.txt
