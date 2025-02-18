@@ -14,7 +14,11 @@
 	where s(he) defines the needs s(he) can meet,
 	and the types of projects s(he) would like to support.</description>
 	<url>https://github.com/jlmacle/changemakers-matching_backend</url>
-
+	<licenses>
+        <license>
+            <name>MIT</name>
+        </license>
+    </licenses>
 
 	<developers>
 		<developer>
@@ -146,11 +150,12 @@
 						<reports>
 							<report>index</report>
 							<report>summary</report>
+							<report>licenses</report>
 							<report>team</report>
-							<report>issue-management</report>
+							<!-- <report>issue-management</report> -->
 							<!-- <report>ci-management</report> -->
 							<report>dependencies</report>
-							<report>dependency-info</report>
+							<!-- <report>dependency-info</report> -->
 							<report>dependency-management</report>							
 							<!-- <report>mailing-lists</report> -->
 							<report>ci-management</report>							
