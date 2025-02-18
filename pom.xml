@@ -14,11 +14,17 @@
 	where s(he) defines the needs s(he) can meet,
 	and the types of projects s(he) would like to support.</description>
 	<url>https://github.com/jlmacle/changemakers-matching_backend</url>
+
 	<licenses>
         <license>
             <name>MIT</name>
         </license>
     </licenses>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/jlmacle/changemakers-matching_backend/issues</url>
+	</issueManagement>
 
 	<developers>
 		<developer>
@@ -130,11 +136,11 @@
 	<!-- Maven reporting tools -->	
 	<reporting>
 		<plugins>
-		<!-- ********************* Maven reporting ********************* -->
+		<!-- ********************* Maven reporting ********************* -->			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.21.0</version>							
+				<version>4.0.0-M16</version>							
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -152,14 +158,14 @@
 							<report>summary</report>
 							<report>licenses</report>
 							<report>team</report>
-							<!-- <report>issue-management</report> -->
+							<report>issue-management</report>
 							<!-- <report>ci-management</report> -->
 							<report>dependencies</report>
 							<!-- <report>dependency-info</report> -->
 							<report>dependency-management</report>							
 							<!-- <report>mailing-lists</report> -->
 							<report>ci-management</report>							
-							<!-- <report>scm</report -->
+							<report>scm</report>
 						</reports>
 					</reportSet>
 				</reportSets>
