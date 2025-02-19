@@ -33,10 +33,17 @@
 		</developer>
 	</developers>
 
+	<!-- <build>
+		<sourceDirectory>src/main/java</sourceDirectory> 
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+	</build> -->
+
 	<properties>		
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
     	<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.user.language>en</maven.compiler.user.language>
+		<maven.compiler.user.country>US</maven.compiler.user.country>
 		
 		<sonar.organization>jlmacle</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -134,7 +141,18 @@
 	<!-- Maven reporting tools -->	
 	<reporting>
 		<plugins>
-		<!-- ********************* Maven reporting ********************* -->			
+		<!-- ********************* Maven reporting ********************* -->	
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId> <!-- could fail for lack of public classes -->
+				<version>3.11.2</version>					
+				<configuration>
+					<debug>true</debug>
+					<language>en</language>
+					<countries>US</countries>
+					<show>private</show>	
+				</configuration>		
+			</plugin>		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>

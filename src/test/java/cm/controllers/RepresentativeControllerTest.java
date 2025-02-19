@@ -1,5 +1,6 @@
 package cm.controllers;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +23,7 @@ import cm.models.Representative;
 import cm.models.RepresentativeDTO;
 import cm.repositories.RepresentativesRepository;
 
-public class RepresentativeControllerTest {
+ class RepresentativeControllerTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
