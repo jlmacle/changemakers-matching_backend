@@ -22,7 +22,7 @@ import cm.models.Representative;
 import cm.models.RepresentativeDTO;
 import cm.repositories.RepresentativesRepository;
 
-class RepresentativeControllerTest {
+public class RepresentativeControllerTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
