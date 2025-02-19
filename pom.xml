@@ -147,9 +147,6 @@
 				<artifactId>maven-javadoc-plugin</artifactId> <!-- could fail for lack of public classes -->
 				<version>3.11.2</version>					
 				<configuration>
-					<debug>true</debug>
-					<language>en</language>
-					<countries>US</countries>
 					<show>private</show>	
 				</configuration>		
 			</plugin>		
