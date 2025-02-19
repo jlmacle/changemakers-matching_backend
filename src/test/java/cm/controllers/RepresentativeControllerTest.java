@@ -23,7 +23,8 @@ import cm.models.Representative;
 import cm.models.RepresentativeDTO;
 import cm.repositories.RepresentativesRepository;
 
- class RepresentativeControllerTest {
+// Class kept default to meet SonarQube quality standards
+class RepresentativeControllerTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
