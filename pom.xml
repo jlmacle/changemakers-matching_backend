@@ -33,11 +33,6 @@
 		</developer>
 	</developers>
 
-	<!-- <build>
-		<sourceDirectory>src/main/java</sourceDirectory> 
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-	</build> -->
-
 	<properties>		
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
