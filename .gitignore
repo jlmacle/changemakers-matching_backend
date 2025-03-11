@@ -9,6 +9,7 @@
 allure-results/
 allure-report/
 
+.DS_Store
 _scripts/.DS_Store
 
 _scripts/project-report_mvn-site-output.txt
