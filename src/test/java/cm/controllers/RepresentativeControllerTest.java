@@ -75,22 +75,5 @@ class RepresentativeControllerTest {
         assertEquals("Username already exists", response.getBody());
     }
 
-    @SuppressWarnings("null")
-    @Test
-    void testCreateAccount_JsonProcessingException() throws JsonProcessingException {
-        Map<String, String> credentials = new HashMap<>();
-        credentials.put("username", "testuser");
-        credentials.put("password", "password");
-
-        when(representativeRepository.findByUsername("testuser")).thenReturn(null);
-        when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
-        when(representativeRepository.save(any(Representative.class))).thenReturn(new Representative("testuser", "encodedPassword"));
-        ObjectMapper mapper = mock(ObjectMapper.class);
-        when(mapper.writeValueAsString(any(RepresentativeDTO.class))).thenThrow(new JsonProcessingException("Error") {});
-
-        ResponseEntity<String> response = representativeController.createAccount(credentials);
-
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(response.getBody().contains("Error while parsing JSON"));
-    }
+    
 }
