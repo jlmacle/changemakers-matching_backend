@@ -1,0 +1,21 @@
+Extension Pack for Java, Microsoft
+
+Project Manager for Java, Microsoft
+
+Debugger for Java, Microsoft
+
+Test Runner for Java, Microsoft
+
+Maven for Java, Microsoft
+
+Spring Boot Dashboard, Microsoft
+
+Spring Boot Extension Pack, VMware
+
+Spring Boot Tools, VMware
+
+Spring Initializr Java Support, Microsoft
+
+Red Hat Dependency Analytics, Red Hat
+
+SonarQube for IDE, SonarSource
