@@ -43,11 +43,14 @@ public class RepresentativeDTO {
     /**
      * Populates the DTO with data from a Representative object.
      * @param representative the representative object
+     * @return the populated DTO
      */
-    public void getRepresentativeData(Representative representative) {
+    public RepresentativeDTO getRepresentativeData(Representative representative) {
         RepresentativeDTO dto = new RepresentativeDTO();
         dto.setUsername(representative.getUsername());
-        dto.setEmail(representative.getEmail());      
+        dto.setEmail(representative.getEmail());     
+        
+        return dto;
     }
    
 }
