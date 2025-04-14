@@ -19,7 +19,8 @@ import cm.models.RepresentativeDTO;
 import cm.repositories.RepresentativesRepository;
 
 
-/* String sanitizations */
+/* Todo: String sanitizations */
+/* Todo: Password policy check: length, complexity, ... */
 
 /**
  * Controller for handling representative-related requests.
@@ -28,7 +29,7 @@ import cm.repositories.RepresentativesRepository;
 public class RepresentativeController {
     
     Logger logger = LoggerFactory.getLogger(getClass());    
-    private final boolean debug = logger.isErrorEnabled(); 
+    private final boolean debug = logger.isDebugEnabled(); 
 
     private final PasswordEncoder passwordEncoder;
     private final RepresentativesRepository representativeRepository;
