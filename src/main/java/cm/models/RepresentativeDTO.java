@@ -52,15 +52,11 @@ public class RepresentativeDTO {
     /**
      * Populates the DTO with data from a Representative object.
      * @param representative the representative object
-     * @return the populated DTO
      */
-    public RepresentativeDTO getRepresentativeData(Representative representative) {
-        RepresentativeDTO dto = new RepresentativeDTO();
-        dto.setUsername(representative.getUsername());
-        dto.setEmail(representative.getEmail());     
-        dto.setProjectName(representative.getProjectName());
-        
-        return dto;
+    public void getRepresentativeData(Representative representative) {        
+        this.setUsername(representative.getUsername());
+        this.setEmail(representative.getEmail());     
+        this.setProjectName(representative.getProjectName());
     }
 
     
