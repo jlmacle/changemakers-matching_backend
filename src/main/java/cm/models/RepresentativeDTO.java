@@ -7,6 +7,7 @@ public class RepresentativeDTO {
     
     private String username;
     private String email;
+    private String projectName;
 
     /**
      * Gets the username.
@@ -39,7 +40,15 @@ public class RepresentativeDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getProjectName() {
+        return projectName;
+    }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+    
     /**
      * Populates the DTO with data from a Representative object.
      * @param representative the representative object
@@ -49,8 +58,11 @@ public class RepresentativeDTO {
         RepresentativeDTO dto = new RepresentativeDTO();
         dto.setUsername(representative.getUsername());
         dto.setEmail(representative.getEmail());     
+        dto.setProjectName(representative.getProjectName());
         
         return dto;
     }
+
+    
    
 }

@@ -54,6 +54,10 @@ public class Representative {
     @Column(name="representative_email")
     private String email;
 
+    @Column(name="project_name")
+    private String projectName;
+
+
     /**
     * A field useful for Hibernate.
      * Hibernate will automatically increment this field on update.
