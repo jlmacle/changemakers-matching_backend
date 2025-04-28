@@ -1,6 +1,5 @@
 To take into account in the development:
 
-
 Sources:
 * The Web application hacker's handbook, 2nd edition, Daffyd Stuttard, Marcus Pinto
 
