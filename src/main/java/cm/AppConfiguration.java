@@ -2,6 +2,10 @@ package cm;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -30,8 +34,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AppConfiguration {	
 	private static Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
-    private final boolean debug = logger.isInfoEnabled();
-
+    
     private static final String ENDPOINT_PROJECTS = "/projects";
     private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributors/new-account";
     private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representatives/new-account";
@@ -49,27 +52,65 @@ public class AppConfiguration {
      */
     @Bean
     DataSource getDataSource() {
-        if (debug) logger.info("Entering getDataSource()");        
-
-        // DB_URL contains the value of the JDBC URL
-        // jdbc:postgresql://<hostname>:<port>/<databasename> 
-       
-        String postgresPort = System.getenv("DB_POSTGRES_PORT");
-        String dbName = System.getenv("DB_NAME");
-        String jdbcURL = "jdbc:postgresql://localhost:"+postgresPort+"/"+dbName;
-        String dbUSERNAME = System.getenv("DB_USERNAME");
-        String dbPASSWORD = System.getenv("DB_PASSWORD");
-
-        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.postgresql.Driver");       			
-        
-        dataSourceBuilder.url(jdbcURL);
-        dataSourceBuilder.username(dbUSERNAME);
-        dataSourceBuilder.password(dbPASSWORD);
-        return dataSourceBuilder.build();
+        String dbURL = null;
+		String dbUSERNAME = null ;
+		String dbPASSWORD = null ;
+		
+		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
+		dataSourceBuilder.driverClassName("org.postgresql.Driver");
+		if (System.getenv("POSTGRES_USER_FILE") != null) 
+		{
+			dbUSERNAME = extractDockerSecretFromFile(System.getenv("POSTGRES_USER_FILE"));			
+            logger.info("dbUSERNAME from Docker: {}",dbUSERNAME);
+        }
+		else
+		{
+			dbUSERNAME = System.getenv("DB_USERNAME");
+			
+		}
+		
+		if (System.getenv("POSTGRES_PASSWORD_FILE") != null)
+		{
+			dbPASSWORD = extractDockerSecretFromFile(System.getenv("POSTGRES_PASSWORD_FILE"));			
+            logger.info("dbPASSWORD from Docker: {}",dbPASSWORD);
+        }
+		else
+		{
+			dbPASSWORD = System.getenv("DB_PASSWORD");
+		}
+		
+		if (System.getenv("POSTGRES_DB_FILE") != null && System.getenv("DB_JDBC_ROOT_FILE") != null) 
+		{
+            logger.info("System.getenv(\"POSTGRES_DB_FILE\", {})",System.getenv("POSTGRES_DB_FILE"));
+            logger.info("System.getenv(\"DB_JDBC_ROOT_FILE\",{})",System.getenv("DB_JDBC_ROOT_FILE"));
+			dbURL = extractDockerSecretFromFile(System.getenv("DB_JDBC_ROOT_FILE")) + extractDockerSecretFromFile(System.getenv("POSTGRES_DB_FILE"));		
+			logger.info("dbURL from Docker: {}",dbURL);
+        }		
+		
+		else
+		{
+			dbURL =  System.getenv("DB_URL");			
+		}		
+		
+		dataSourceBuilder.url(dbURL);	
+		dataSourceBuilder.username(dbUSERNAME);
+		dataSourceBuilder.password(dbPASSWORD);				
+		return dataSourceBuilder.build();
 
     }
 
+    public static String extractDockerSecretFromFile(String pathToSecret)
+	{	String secret=null;
+		try {			
+			secret = Files.readString(Paths.get(pathToSecret));
+			logger.info("Path to secret : {}",pathToSecret);
+			logger.info("Secret value extracted : {}",secret);
+		} catch (IOException e) {
+			logger.info("*** Caught an IOException in extractDockerSecretFromFile:{}",e.getLocalizedMessage());
+			//e.printStackTrace //suppressed to avoid a security hotspot.
+		}		
+		return secret;
+	}
 
     /**
      * Configures CORS settings for the application.
