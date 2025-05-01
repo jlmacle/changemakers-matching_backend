@@ -1,0 +1,18 @@
+To run the backend on Docker (macOS Sequoia):
+
+Postgres Docker image pulling
+docker pull postgres:alpine
+https://hub.docker.com/_/postgres 
+
+Node as a swarm manager
+docker swarm init
+
+Docker secrets creation (assuming the existence of the environment variables)
+printf "jdbc:postgresql://postgresql:5432/" | 
+docker secret create DB_JDBC_ROOT -
+
+printf $DB_NAME | docker secret create POSTGRES_DB -
+
+printf $DB_USERNAME | docker secret create POSTGRES_USER -
+
+printf $DB_PASSWORD | docker secret create POSTGRES_PASSWORD -
