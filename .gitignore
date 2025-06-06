@@ -12,4 +12,4 @@ allure-report/
 .DS_Store
 _scripts/.DS_Store
 
-_scripts/project-report_mvn-site-output.txt
+_Reporting-scripts/project-report_mvn-site-output.txt
