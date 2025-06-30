@@ -34,9 +34,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AppConfiguration {	
 	private static Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
-    
-    private static final String ENDPOINT_PROJECTS = "/projects";
-    private static final String ENDPOINT_CONTRIBUTOR_NEWACC = "/contributors/new-account";
+        
     private static final String ENDPOINT_REPRESENTATIVE_NEWACC = "/representatives/new-account";
 
 
@@ -127,9 +125,6 @@ public class AppConfiguration {
          
                 String[] origins = {CORS_LOOPBACK3000_LIVEPREVIEW, CORS_LOOPBACK3001_LIVEPREVIEW,
                     CORS_LOOPBACK3002_LIVEPREVIEW, CORS_LOOPBACK_LIGHTTPD};
-
-                registry.addMapping(ENDPOINT_PROJECTS).allowedOrigins(origins).allowedMethods("GET");
-                registry.addMapping(ENDPOINT_CONTRIBUTOR_NEWACC).allowedOrigins(origins).allowedMethods("POST", "OPTIONS");
                 registry.addMapping(ENDPOINT_REPRESENTATIVE_NEWACC).allowedOrigins(origins).allowedMethods("POST", "OPTIONS");
             
             }
@@ -144,20 +139,16 @@ public class AppConfiguration {
      */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http 
         // Temporary, to allow POST requests. A security hotspot to fix.
         .csrf( csrf -> 
             {
-                csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_CONTRIBUTOR_NEWACC, "POST") );
                 csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_REPRESENTATIVE_NEWACC, "POST") );
             }
-        )
+        ) 
         .authorizeHttpRequests
             ( authz -> authz
-            // To allow access to endpoint without asking for authentication
-            .requestMatchers(HttpMethod.GET, ENDPOINT_PROJECTS).permitAll()
-            .requestMatchers(HttpMethod.OPTIONS,ENDPOINT_CONTRIBUTOR_NEWACC).permitAll()
-            .requestMatchers(HttpMethod.POST,ENDPOINT_CONTRIBUTOR_NEWACC).permitAll()
+            // To allow access to endpoint without asking for authentication           
             .requestMatchers(HttpMethod.OPTIONS,ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
             .requestMatchers(HttpMethod.POST,ENDPOINT_REPRESENTATIVE_NEWACC).permitAll()
             // In all other cases, authentication is required
