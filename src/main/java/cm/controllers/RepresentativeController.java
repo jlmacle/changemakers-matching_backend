@@ -67,23 +67,11 @@ public class RepresentativeController {
            /* Planning to monitor  if the frontend validation has been bypassed 
            (using Postman e.g.) */
             Representative representative = new Representative(username, encodedPassword);
-            Representative rep = representativeRepository.save(representative);                
-            RepresentativeDTO repDTO = new RepresentativeDTO();
-            repDTO.getRepresentativeData(rep);
-            //Email unrelated to real and personal user data
-            repDTO.setEmail(username+"@mail.com");
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonString="";
-            try {
-                jsonString = mapper.writeValueAsString(repDTO);
-            } catch (JsonProcessingException e) {                
-                if (debug) { logger.error("Error while parsing JSON: {}", e.getMessage()); }
-                e.printStackTrace();
-            }            
-
+            representativeRepository.save(representative);                
+            
             return ResponseEntity
             .status(HttpStatus.CREATED) // HTTP 201 Created
-            .body(jsonString); // Assuming jsonString is a well-formed JSON string
+            .body("Username created"); // Assuming jsonString is a well-formed JSON string
         }
          
          
