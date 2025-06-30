@@ -1,1 +1,4 @@
-http://127.0.0.1:3000/www/index.html
+curl http://localhost:8080/representatives/new-account -H "Content-Type: application/json" -d '{   "username": "alice", "password": "s3cr3t"}' -i
+
+409 Conflict : user created twice
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409 
