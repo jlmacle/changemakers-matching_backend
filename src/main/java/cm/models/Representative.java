@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -57,17 +56,8 @@ public class Representative {
     @Column(name="project_name")
     private String projectName;
 
-
-    /**
-    * A field useful for Hibernate.
-     * Hibernate will automatically increment this field on update.
-     */
-    @Version
-    private Integer version; 
-
     /**
      * Constructs a new Representative object with the specified username and password.
-     *
      * @param username the username of the representative
      * @param password the password of the representative
      */
