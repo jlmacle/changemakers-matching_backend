@@ -140,7 +140,7 @@ public class AppConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http 
-        // Temporary, to allow POST requests. A security hotspot to fix.
+        // Temporary, to allow POST requests from curl. A security hotspot to fix.
         .csrf( csrf -> 
             {
                 csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_REPRESENTATIVE_NEWACC, "POST") );
