@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +24,11 @@ import cm.repositories.RepresentativesRepository;
 @TestPropertySource(properties = "server.port=8080")
 class RepresentativeControllerTest {
 
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @Mock
+    @Autowired
     private RepresentativesRepository representativeRepository;
 
-    @InjectMocks
-    private RepresentativeController representativeController;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    @Autowired
+    private RepresentativeController representativeController;    
 
     @Test
     void testCreateAccount_Success() {
@@ -53,13 +46,6 @@ class RepresentativeControllerTest {
         // Testing the response status code
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         System.out.println("Response status: "+response.getStatusCode());
-
-        System.out.println("Pausing code for 20s");
-        try {
-            Thread.sleep(20000); 
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
 
         // Testing that Spring JPA is able to find the user      
         Representative userRetrieval = representativeRepository.findByUsername("testuser");
