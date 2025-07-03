@@ -1,4 +1,10 @@
 curl http://localhost:8080/representatives/new-account -H "Content-Type: application/json" -d '{   "username": "alice", "password": "s3cr3t"}' -i
 
+HTTP response status codes
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status 
+
+201 Created
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/201
+
 409 Conflict : user created twice
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409 
