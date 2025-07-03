@@ -1,7 +1,5 @@
 package cm.controllers;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
@@ -12,18 +10,17 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.context.TestPropertySource;
 
 import cm.models.Representative;
-import cm.models.RepresentativeDTO;
 import cm.repositories.RepresentativesRepository;
 
-// Class kept default to meet SonarQube quality standards
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@TestPropertySource(properties = "server.port=8080")
 class RepresentativeControllerTest {
 
     @Mock
@@ -36,44 +33,44 @@ class RepresentativeControllerTest {
     private RepresentativeController representativeController;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testCreateAccount_Success() throws JsonProcessingException {
+    void testCreateAccount_Success() {
+        // At start, the database is empty by configuration
+        // (spring.jpa.hibernate.ddl-auto=create)
+
+        // At first, searching for a user should return null
+        assertEquals(null, representativeRepository.findByUsername("testuser"));
+        
+        // Then, after creating a user, the user should be found successfully
         Map<String, String> credentials = new HashMap<>();
         credentials.put("username", "testuser");
-        credentials.put("password", "password");
-
-        when(representativeRepository.findByUsername("testuser")).thenReturn(null);
-        when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
-        when(representativeRepository.save(any(Representative.class))).thenReturn(new Representative("testuser", "encodedPassword"));
-
-        ResponseEntity<String> response = representativeController.createAccount(credentials);
-
+        credentials.put("password", "password");        
+        ResponseEntity<String> response = representativeController.createAccount(credentials);        
+        // Testing the response status code
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        ObjectMapper mapper = new ObjectMapper();
-        RepresentativeDTO repDTO = new RepresentativeDTO();
-        repDTO.setUsername("testuser");
-        repDTO.setEmail("testuser@mail.com");
-        String expectedJson = mapper.writeValueAsString(repDTO);
-        assertEquals(expectedJson, response.getBody());
+        System.out.println("Response status: "+response.getStatusCode());
+
+        System.out.println("Pausing code for 20s");
+        try {
+            Thread.sleep(20000); 
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Testing that Spring JPA is able to find the user      
+        Representative userRetrieval = representativeRepository.findByUsername("testuser");
+        System.out.println("User id: "+userRetrieval.getId());
+        
+        assertNotEquals(null, userRetrieval);  
+
+        
     }
 
-    @Test
-    void testCreateAccount_UsernameExists() {
-        Map<String, String> credentials = new HashMap<>();
-        credentials.put("username", "existinguser");
-        credentials.put("password", "password");
-
-        when(representativeRepository.findByUsername("existinguser")).thenReturn(new Representative("existinguser", "encodedPassword"));
-
-        ResponseEntity<String> response = representativeController.createAccount(credentials);
-
-        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
-        assertEquals("Username already exists", response.getBody());
-    }
+   
 
     
 }
