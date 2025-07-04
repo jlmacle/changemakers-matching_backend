@@ -16,7 +16,7 @@ import cm.models.Representative;
 import cm.repositories.RepresentativesRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource(properties = "server.port=8080")
+@TestPropertySource(properties = "server.port=8081")
 class RepresentativeControllerTest {
 
     @Autowired
