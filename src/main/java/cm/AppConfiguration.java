@@ -19,7 +19,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -141,11 +140,7 @@ public class AppConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http 
         // Temporary, to allow POST requests from curl. A security hotspot to fix.
-        .csrf( csrf -> 
-            {
-                csrf.ignoringRequestMatchers( new AntPathRequestMatcher(ENDPOINT_REPRESENTATIVE_NEWACC, "POST") );
-            }
-        ) 
+        .csrf( csrf -> csrf.ignoringRequestMatchers(ENDPOINT_REPRESENTATIVE_NEWACC) ) 
         .authorizeHttpRequests
             ( authz -> authz
             // To allow access to endpoint without asking for authentication           
