@@ -6,7 +6,7 @@ echo "Re-building the Docker image with the new code."
 echo "- Removing the previous image if existant"
 docker image rm changemakers-matching-backend:0.2  2> /dev/null
 
-echo "- Building the Docker image with: mvn spring-boot:build-image."
+echo "- Building the Docker image with: mvn spring-boot:build-image"
 cd ..
 mvn spring-boot:build-image
 
@@ -28,6 +28,6 @@ sleep 60
 #--------------------------------------------------------------------------------------------------------
 echo
 echo "Checking the backend service"
-echo "Should return response headers and {"username":"alice","email":"alice@mail.com","projectName":null}"
+echo 'Should return response headers and "Username created"'
 echo
 curl http://localhost:8080/representatives/new-account -H "Content-Type: application/json" -d '{"username": "alice", "password": "s3cr3t"}' -i
