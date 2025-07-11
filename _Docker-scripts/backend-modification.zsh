@@ -1,3 +1,4 @@
+DIR="_Docker-scripts"
 #--------------------------------------------------------------------------------------------------------
 # Re-building the image 
 #--------------------------------------------------------------------------------------------------------
@@ -20,7 +21,7 @@ docker stack rm cm_stack 2> /dev/null
 sleep 10
 
 echo "- Re-building the Docker stack"
-docker stack deploy -c _Docker-scripts/docker-compose-stack-local-images.yml cm_stack
+docker stack deploy -c "$DIR/docker-compose-stack-local-images.yml" cm_stack
 sleep 60
 
 #--------------------------------------------------------------------------------------------------------
