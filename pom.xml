@@ -49,7 +49,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<!-- https://www.baeldung.com/spring-boot-starter-parent -->
 		<!-- "provides default configurations for Maven plugins" -->
-		<version>3.5.3</version>
+		<version>3.5.4</version>
 		<relativePath/>
 	</parent>	
 
